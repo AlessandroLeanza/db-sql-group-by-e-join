@@ -1,0 +1,33 @@
+
+use db_university;
+
+#Contare quanti iscritti ci sono stati ogni anno (group by)
+
+SELECT year (s.enrolment_date) as anno_iscrizione, COUNT(*)
+FROM students s
+GROUP BY anno_iscrizione;
+
+
+#Contare gli insegnanti che hanno l'ufficio nello stesso edificio (group by)
+
+SELECT t.office_number, COUNT(*) 
+FROM teachers t 
+GROUP BY t.office_number;
+
+
+#Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia (Join)
+
+SELECT *
+FROM students s 
+JOIN degrees deg on deg.id = s.degree_id
+WHERE deg.name like "%Economia%";
+
+
+#Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
+
+SELECT *
+FROM courses c 
+JOIN degrees deg on deg.id = c.degree_id
+JOIN departments d on deg.id = d.id
+WHERE deg.name LIKE "%Corso di Laurea Magistrale%" AND 
+d.name like "%Neuroscienze%";
